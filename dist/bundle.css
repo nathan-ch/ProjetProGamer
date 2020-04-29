@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css2?family=Anton&family=Roboto&display=swap);
 @charset "UTF-8";
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
@@ -9874,4 +9875,11 @@ h3 {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Anton";
+}
+
+body {
+  font-family: "Roboto";
 }

@@ -1,3 +1,5 @@
+import {header} from "./header"
+
 const GameList = (argument = "") => {
     const preparePage = () => {
       let cleanedArgument = argument.replace(/\s+/g, "-");
@@ -13,21 +15,15 @@ const GameList = (argument = "") => {
           .then((response) => response.json())
           .then((response) => {
             response.results.forEach((article) => {
-              articles += `
-                    <div class="col-sm-6 offset-3">
-                    <div class="card mb-3 visible" >
-                        <div class="row card-body">
-                            <img class="col-sm-6" src="${article.background_image}" style="max-width: 25%;
-                            height: auto;"/>
-                            <div class="col-sm-6">
-                            <h5 class="card-title">${article.name}</h5>
-                                <p class="card-text">Date de sortie : ${article.released}</p>
-                                <a class="btn btn-primary" href = "#gamedetail/${article.id}">${article.id}</a>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                  `;
+              articles += `<div class="col-md-4">
+              <div class="card border-0 m-2 bg-dark text-white">
+                <img class="card-img-top" src="${article.background_image}" alt="Card image cap" style="max-width: 100%;height: auto;">
+                <div class="card-body">
+                  <h5 class="card-title text-white">${article.name}</h5>
+                  <a href="#gamedetail/${article.id}" class="btn btn-primary">See more</a>
+                </div>
+              </div>
+          </div>`;
             });
             document.querySelector(".page-list .articles").innerHTML = articles;
           });
@@ -37,12 +33,7 @@ const GameList = (argument = "") => {
     };
   
     const render = () => {
-      pageContent.innerHTML = `
-        <section class="page-list">
-          <div class="articles">...loading</div>
-        </section>
-      `;
-  
+      pageContent.innerHTML = header() ;
       preparePage();
     };
   
