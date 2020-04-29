@@ -1,4 +1,6 @@
 import {header} from "./header"
+import {displayMore} from "./displayMore"
+import {searchGame} from "./searchGame"
 
 const GameList = (argument = "") => {
     const preparePage = () => {
@@ -35,6 +37,14 @@ const GameList = (argument = "") => {
     const render = () => {
       pageContent.innerHTML = header() ;
       preparePage();
+      // Event to search game
+      document.querySelector(".form-control").addEventListener("keypress", (e) => {
+        if (e.code == "Enter") {
+          searchGame();
+        }
+      });
+      // Event to load more games
+      document.getElementById("loadMore").addEventListener("click",displayMore)
     };
   
     render();
