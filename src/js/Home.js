@@ -4,6 +4,7 @@ import {searchGame} from "./searchGame"
 import {loadMoreButton} from "./loadMoreButton"
 import {cardHover} from "./cardHover"
 import {cardHoverOut} from "./cardHoverOut"
+import { selectPlatform } from "./selectPlatform"
 
 
 
@@ -25,6 +26,7 @@ const Home = (argument = "") => {
         if (argument) {
           finalURL = "https://api.rawg.io/api/games?search=" + argument + "&page_size=27";
         }
+        console.log(finalURL);
         fetch(`${finalURL}`)
           .then((response) => response.json())
           .then((response) => {
@@ -35,16 +37,15 @@ const Home = (argument = "") => {
               loopLength = response.results.length
             }
             for (let i = 0; i < loopLength; i++) {
-              let cardStyle = ""
-              let cardClass = ""
+              let cardClass = "load-more-visible"
               if(i > 8 ){
-                cardClass = "not-visible"
+                cardClass = "load-more-not-visible"
               }
               let platforms = "";
               let article = response.results[i];
               article.platforms.forEach(element => {
                 platforms +=`
-                <div class="col-auto"><img src="src/img/${element.platform.id}.svg"></div>
+                <div class="col-auto platform" id="${element.platform.id}"><a href="#home/?platforms=${element.platform.id}&dates=2020-01-01,2020-12-31&ordering=-added&page_size=27"><img src="src/img/${element.platform.id}.svg"></a></div>
                 `
               });
               let genresNames = ""
@@ -53,7 +54,7 @@ const Home = (argument = "") => {
                   });
               articles += `
               <div class="col-md-4">
-                <div class="card border-0 m-2 bg-dark text-white ${cardClass}" ${cardStyle} id="card${i}">
+                <div class="card border-0 m-2 bg-dark text-white ${cardClass}" id="card${i}">
                   <img class="card-img-top" src="${article.background_image}" alt="Card image cap" style="max-width: 100%;height: 188px;">
                   <div class="gameInfos not-visible" style="height: 188px;">
                     <h3>${article.released}</h3>
@@ -79,11 +80,11 @@ const Home = (argument = "") => {
                     with both new and existing partners, industry executives, gamers, and social influencers providing unprecedented exposure</p>
                 </div>
                 <div class="col-md-3">
-                    <select class="browser-default custom-select custom-select-lg mb-3 bg-danger text-white">
-                        <option selected>Plateform : Any</option>
+                    <select id="select" class="browser-default custom-select custom-select-lg mb-3 bg-danger text-white">
+                        <option value=0 selected>Plateform : Any</option>
                         <option value="1">Xbox One</option>
-                        <option value="2">PS4</option>
-                        <option value="3">PC</option>
+                        <option value="18">PS4</option>
+                        <option value="4">PC</option>
                       </select>
                 </div>  `
 
@@ -95,6 +96,7 @@ const Home = (argument = "") => {
                   // Card Hover mouse enter
                   img.addEventListener("mouseleave",cardHoverOut)
                 });
+                document.getElementById("select").addEventListener("click",selectPlatform)
             });
       };  
       fetchList("https://api.rawg.io/api/games?dates=2020-01-01,2020-12-31&ordering=-added&page_size=27", cleanedArgument);
