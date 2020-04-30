@@ -86,13 +86,10 @@ const Home = (argument = "") => {
                         <option value="18">PS4</option>
                         <option value="4">PC</option>
                         <option value="7">SWITCH</option>
-                        <option value="4">IOS</option>
+                        <option value="5">IOS</option>
                         <option value="21">ANDROID</option>
                         <option value="5">MAC OS</option>
                         <option value="6">LINUX</option>
-
-
-
                       </select>
                 </div>  `
 
