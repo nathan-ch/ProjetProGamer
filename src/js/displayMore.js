@@ -1,8 +1,8 @@
 const displayMore = () =>{
     for (let i = 0; i < 9; i++) {
-      const element = document.querySelectorAll(".loadMore")[0];
-      element.style.display="inline"
-      element.classList.remove("loadMore");
+      console.log(document.querySelectorAll("div.col-md-4 > div.not-visible"));
+      const element = document.querySelectorAll("div.col-md-4 > div.not-visible")[0];
+      element.classList.remove("not-visible");
       element.classList.add("visible");
 
     };

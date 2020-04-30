@@ -38,8 +38,7 @@ const Home = (argument = "") => {
               let cardStyle = ""
               let cardClass = ""
               if(i > 8 ){
-                cardStyle = "style='display:none'"
-                cardClass = "loadMore"
+                cardClass = "not-visible"
               }
               let platforms = "";
               let article = response.results[i];
