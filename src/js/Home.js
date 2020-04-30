@@ -2,6 +2,10 @@ import {header} from "./header"
 import {displayMore} from "./displayMore"
 import {searchGame} from "./searchGame"
 import {loadMoreButton} from "./loadMoreButton"
+import {cardHover} from "./cardHover"
+import {cardHoverOut} from "./cardHoverOut"
+
+
 
 
 const Home = (argument = "") => {
@@ -44,19 +48,28 @@ const Home = (argument = "") => {
                 <div class="col-auto"><img src="src/img/${element.platform.id}.svg"></div>
                 `
               });
+              let genresNames = ""
+                  article.genres.forEach(element => {
+                    genresNames+=`${element.name}, `
+                  });
               articles += `
               <div class="col-md-4">
-              <a href="#gamedetail/${article.id}">
-                  <div class="card border-0 m-2 bg-dark text-white ${cardClass}" ${cardStyle}>
-                    <img class="card-img-top" src="${article.background_image}" alt="Card image cap" style="max-width: 100%;height: 188px;">
-                    <div class="card-body">
+                <div class="card border-0 m-2 bg-dark text-white ${cardClass}" ${cardStyle} id="card${i}">
+                  <img class="card-img-top" src="${article.background_image}" alt="Card image cap" style="max-width: 100%;height: 188px;">
+                  <div class="gameInfos not-visible" style="height: 188px;">
+                    <h3>${article.released}</h3>
+                    <h4>${article.rating}/5 ${article.reviews_count} votes</h4>
+                    <h4>${genresNames}</h4>
+                  </div>
+                  <div class="card-body">
+                    <a href="#gamedetail/${article.id}">
                       <h5 class="card-title text-white">${article.name}</h5>
-                      <div id="platforms${i}" class="row">${platforms}</div>
+                    </a>
+                    <div id="platforms${i}" class="row">${platforms}</div>
                     </div>
                   </div>
-                </a>
               </div>`
-            }
+              }
                 document.querySelector(".page-list .articles").innerHTML = articles;
                 document.getElementById("welcome").innerHTML=`<div class="col-md-12">
                 <h3 class="text-white">Welcome,</h3>
@@ -65,15 +78,24 @@ const Home = (argument = "") => {
                     brightest, and most innovative in the interactive entertainment industry. For three exciting days, leading-edge companies,
                     groundbreaking new technologies, and never-before-seen products will be showcased. The Hyper Progame connects you
                     with both new and existing partners, industry executives, gamers, and social influencers providing unprecedented exposure</p>
-            </div>
-            <div class="col-md-3">
-                <select class="browser-default custom-select custom-select-lg mb-3 bg-danger text-white">
-                    <option selected>Plateform : Any</option>
-                    <option value="1">Xbox One</option>
-                    <option value="2">PS4</option>
-                    <option value="3">PC</option>
-                  </select>
-            </div>  `
+                </div>
+                <div class="col-md-3">
+                    <select class="browser-default custom-select custom-select-lg mb-3 bg-danger text-white">
+                        <option selected>Plateform : Any</option>
+                        <option value="1">Xbox One</option>
+                        <option value="2">PS4</option>
+                        <option value="3">PC</option>
+                      </select>
+                </div>  `
+
+                document.querySelectorAll(".card-img-top").forEach((img) => {
+                  // Card Hover mouse enter
+                  img.addEventListener("mouseenter",cardHover)
+                });
+                document.querySelectorAll(".gameInfos").forEach((img) => {
+                  // Card Hover mouse enter
+                  img.addEventListener("mouseleave",cardHoverOut)
+                });
             });
       };  
       fetchList("https://api.rawg.io/api/games?dates=2020-01-01,2020-12-31&ordering=-added&page_size=27", cleanedArgument);
@@ -81,8 +103,8 @@ const Home = (argument = "") => {
     const render = () => {
       pageContent.innerHTML = header();
       pageContent.innerHTML += loadMoreButton()
+
       preparePage();
-      
       // Event to search game
       document.querySelector(".form-control").addEventListener("keypress", (e) => {
         if (e.code == "Enter") {
@@ -92,7 +114,6 @@ const Home = (argument = "") => {
       // Event to load more games
       document.getElementById("loadMore").addEventListener("click",displayMore)
     };
-  
     render();
   };
   export{Home}
