@@ -9883,3 +9883,29 @@ h1, h2, h3, h4, h5, h6 {
 body {
   font-family: "Roboto";
 }
+
+a, a:visited {
+  text-decoration: none;
+  position: relative;
+  color: #DC3545;
+}
+a:after, a:visited:after {
+  content: "";
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  background: #DC3545;
+  transition: 0.2s;
+}
+a:hover:after, a:visited:hover:after {
+  width: 100%;
+}
+a.block, a:visited.block {
+  display: block;
+  padding: 0.5em;
+}
+a.block:hover, a:visited.block:hover {
+  background: #eee;
+}

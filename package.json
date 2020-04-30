@@ -1,13 +1,13 @@
 {
-  "name": "starterwebpack",
+  "name": "hyper_progame",
   "version": "1.0.0",
-  "description": "Starter",
+  "description": "Progame",
   "main": "index.js",
   "scripts": {
     "build": "webpack --env.NODE_ENV=production --config webpack.config.js",
     "dev": "webpack --env.NODE_ENV=development --config webpack.config.js"
   },
-  "author": "",
+  "author": "Nathan Chateau",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^4.4.1",

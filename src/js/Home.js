@@ -1,12 +1,20 @@
-import {GameList} from "./GameList"
 import {header} from "./header"
 import {displayMore} from "./displayMore"
 import {searchGame} from "./searchGame"
+import {loadMoreButton} from "./loadMoreButton"
+
 
 const Home = (argument = "") => {
     const preparePage = () => {
       let cleanedArgument = argument.replace(/\s+/g, "-");
       let articles = "";
+
+      document.querySelector(".page-list .articles").innerHTML = `
+      <section id="pageContent">
+        <div class="spinner-border text-danger" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </section>`
   
       const fetchList = (url, argument) => {
         let finalURL = url;
@@ -25,9 +33,7 @@ const Home = (argument = "") => {
             for (let i = 0; i < loopLength; i++) {
               let cardStyle = ""
               let cardClass = ""
-              console.log("génération des cartes");
               if(i > 8 ){
-                console.log("après 8 cartes");
                 cardStyle = "style='display:none'"
                 cardClass = "loadMore"
               }
@@ -42,7 +48,7 @@ const Home = (argument = "") => {
               <div class="col-md-4">
               <a href="#gamedetail/${article.id}">
                   <div class="card border-0 m-2 bg-dark text-white ${cardClass}" ${cardStyle}>
-                    <img class="card-img-top" src="${article.background_image}" alt="Card image cap" style="max-width: 100%;max-height: 188px;">
+                    <img class="card-img-top" src="${article.background_image}" alt="Card image cap" style="max-width: 100%;height: 188px;">
                     <div class="card-body">
                       <h5 class="card-title text-white">${article.name}</h5>
                       <div id="platforms${i}" class="row">${platforms}</div>
@@ -52,14 +58,29 @@ const Home = (argument = "") => {
               </div>`
             }
                 document.querySelector(".page-list .articles").innerHTML = articles;
+                document.getElementById("welcome").innerHTML=`<div class="col-md-12">
+                <h3 class="text-white">Welcome,</h3>
+                <p class="text-white">The Hyper Progame is the world’s premier event for computer and video games and related products. At The Hyper Progame,
+                    the video game industry’s top talent pack the Los Angeles Convention Center, connecting tens of thousands of the best,
+                    brightest, and most innovative in the interactive entertainment industry. For three exciting days, leading-edge companies,
+                    groundbreaking new technologies, and never-before-seen products will be showcased. The Hyper Progame connects you
+                    with both new and existing partners, industry executives, gamers, and social influencers providing unprecedented exposure</p>
+            </div>
+            <div class="col-md-3">
+                <select class="browser-default custom-select custom-select-lg mb-3 bg-danger text-white">
+                    <option selected>Plateform : Any</option>
+                    <option value="1">Xbox One</option>
+                    <option value="2">PS4</option>
+                    <option value="3">PC</option>
+                  </select>
+            </div>  `
             });
-      };
-      document.getElementById("loadMore").addEventListener("click", loadMore)
-  
+      };  
       fetchList("https://api.rawg.io/api/games?dates=2020-01-01,2020-12-31&ordering=-added&page_size=27", cleanedArgument);
     };
     const render = () => {
       pageContent.innerHTML = header();
+      pageContent.innerHTML += loadMoreButton()
       preparePage();
       
       // Event to search game
