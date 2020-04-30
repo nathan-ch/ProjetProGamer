@@ -1,11 +1,18 @@
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto&display=swap');
 
+
+$font-title: 'Anton';
+$font-body: 'Roboto';
+
+$color-red: #dc3545;
+$color-white: #fff;
+
 h1, h2, h3, h4, h5, h6{
-  font-family: 'Anton';
+  font-family: $font-title;
 }
 body{
-  font-family: 'Roboto';
+  font-family: $font-body;
 }
 .not-visible{
 	display: none;		
@@ -15,4 +22,39 @@ body{
 }
 .card-img-top{
   border-radius: 20px 20px;;
+}
+a.anim, a.anim:visited {
+	text-decoration: none !important;
+	position: relative;
+  color: $color-white;
+	
+	&:after {
+		content: '';
+		height: 3px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		background: $color-red;
+		transition: 0.2s;
+	}
+
+	&:hover:after {
+		width: 100%;
+	}
+	
+	&.block {
+		display: block;
+		padding: 0.5em;
+		
+		&:hover {
+			background:$color-red;
+		}
+	}
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
 }

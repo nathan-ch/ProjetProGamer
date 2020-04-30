@@ -1,6 +1,6 @@
 const selectPlatform = (e) =>{
     let platformSelected = document.getElementById("select").value
-    let games = document.querySelectorAll("div.col-md-4")
+    let games = document.querySelectorAll("div.bigCard")
     games.forEach(game => {
         let result = 0
         game.querySelectorAll('.platform').forEach(platform=>{

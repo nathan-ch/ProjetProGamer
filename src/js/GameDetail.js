@@ -15,27 +15,27 @@ const GameDetail = (argument) => {
             let articleDOM = document.querySelector(".page-detail .article");
             let developersNames=""
             developers.forEach(element => {
-              developersNames+=`<p>${element.name}</p>`
+              developersNames+=`<p><a class="anim" href="#home/games&developers=${element.id}">${element.name}</a></p>`
             });
             let platformsNames=""
             platforms.forEach(element => {
-              platformsNames+=`${element.platform.name}, `              
+              platformsNames+=`<a class="anim" href="#home/games&platforms=${element.platform.id}">${element.platform.name}</a>, `              
             });
             let publishersNames=""
             publishers.forEach(element => {
-              publishersNames+=`<p>${element.name}</p>`                 
-            });
+              publishersNames+=`<p><a class="anim" href="#home/games?ordering=-added&page_size=27&publishers=${element.id}">${element.name}</a></p>`                 
+            }); 
             let genresNames = ""
             genres.forEach(element => {
-              genresNames+=`${element.name}, `
+              genresNames+=`<a class="anim" href="#home/games?ordering=-added&page_size=27&genres=${element.id}">${element.name}</a>, `
             });
             let tagsNames =""
             tags.forEach(element => {
-              tagsNames+=`${element.name}, `
+              tagsNames+=`<a class="anim" href="#home/games?ordering=-added&page_size=27&tags=${element.id}">${element.name}</a>, `
             });
             let storesNames=""
             stores.forEach(element => {
-              storesNames+=`<a href="${element.url}" target="_blank"><p>${element.store.name}</p></a>`
+              storesNames+=`<p><a href="${element.url}" target="_blank">${element.store.name}</a></p>`
             });
             
             let screenshots = ""

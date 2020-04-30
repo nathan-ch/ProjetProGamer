@@ -22,9 +22,9 @@ const Home = (argument = "") => {
       </section>`
   
       const fetchList = (url, argument) => {
-        let finalURL = url;
-        if (argument) {
-          finalURL = "https://api.rawg.io/api/games?search=" + argument + "&page_size=27";
+        let finalURL = url + "?dates=2020-07-01,2020-12-31&ordering=-added&page_size=27";
+        if (argument !== "") {
+          finalURL = url + "?search=" + argument + "&page_size=27";
         }
         console.log(finalURL);
         fetch(`${finalURL}`)
@@ -45,7 +45,7 @@ const Home = (argument = "") => {
               let article = response.results[i];
               article.platforms.forEach(element => {
                 platforms +=`
-                <div class="col-auto platform" id="${element.platform.id}"><a href="#home/?platforms=${element.platform.id}&dates=2020-01-01,2020-12-31&ordering=-added&page_size=27"><img src="src/img/${element.platform.id}.svg"></a></div>
+                <div class="col-auto platform" id="${element.platform.id}"><a href="#home/?dates=2020-01-01,2020-12-31&platforms=${element.platform.id}&ordering=-added&page_size=27"><img src="src/img/${element.platform.id}.svg"></a></div>
                 `
               });
               let genresNames = ""
@@ -53,7 +53,7 @@ const Home = (argument = "") => {
                     genresNames+=`${element.name}, `
                   });
               articles += `
-              <div class="col-md-4">
+              <div class="col-md-4 bigCard">
                 <div class="card border-0 m-2 bg-dark text-white ${cardClass}" id="card${i}">
                   <img class="card-img-top" src="${article.background_image}" alt="Card image cap" style="max-width: 100%;height: 188px;">
                   <div class="gameInfos not-visible" style="height: 188px;">
@@ -62,9 +62,9 @@ const Home = (argument = "") => {
                     <h4>${genresNames}</h4>
                   </div>
                   <div class="card-body">
-                    <a href="#gamedetail/${article.id}">
-                      <h5 class="card-title text-white">${article.name}</h5>
-                    </a>
+                    <h5 class="card-title text-white"><a class="anim" href="#gamedetail/${article.id}">
+                        ${article.name}
+                    </a></h5>
                     <div id="platforms${i}" class="row">${platforms}</div>
                     </div>
                   </div>
@@ -85,6 +85,14 @@ const Home = (argument = "") => {
                         <option value="1">Xbox One</option>
                         <option value="18">PS4</option>
                         <option value="4">PC</option>
+                        <option value="7">SWITCH</option>
+                        <option value="4">IOS</option>
+                        <option value="21">ANDROID</option>
+                        <option value="5">MAC OS</option>
+                        <option value="6">LINUX</option>
+
+
+
                       </select>
                 </div>  `
 
@@ -99,7 +107,7 @@ const Home = (argument = "") => {
                 document.getElementById("select").addEventListener("click",selectPlatform)
             });
       };  
-      fetchList("https://api.rawg.io/api/games?dates=2020-01-01,2020-12-31&ordering=-added&page_size=27", cleanedArgument);
+      fetchList("https://api.rawg.io/api/games", cleanedArgument);    
     };
     const render = () => {
       pageContent.innerHTML = header();

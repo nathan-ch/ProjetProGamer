@@ -9895,3 +9895,36 @@ body {
 .card-img-top {
   border-radius: 20px 20px;
 }
+
+a.anim, a.anim:visited {
+  text-decoration: none !important;
+  position: relative;
+  color: #fff;
+}
+a.anim:after, a.anim:visited:after {
+  content: "";
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  background: #dc3545;
+  transition: 0.2s;
+}
+a.anim:hover:after, a.anim:visited:hover:after {
+  width: 100%;
+}
+a.anim.block, a.anim:visited.block {
+  display: block;
+  padding: 0.5em;
+}
+a.anim.block:hover, a.anim:visited.block:hover {
+  background: #dc3545;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}
