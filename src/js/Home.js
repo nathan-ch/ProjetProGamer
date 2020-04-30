@@ -25,8 +25,10 @@ const Home = (argument = "") => {
         let finalURL = url + "?dates=2020-07-01,2020-12-31&ordering=-added&page_size=27";
         if (argument !== "") {
           finalURL = url + "?search=" + argument + "&page_size=27";
-        }
+          console.log(url);
+        console.log(argument);
         console.log(finalURL);
+        }
         fetch(`${finalURL}`)
           .then((response) => response.json())
           .then((response) => {

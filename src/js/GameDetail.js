@@ -7,7 +7,6 @@ const GameDetail = (argument) => {
       let cleanedArgument = argument.replace(/\s+/g, "-");
       const fetchGame = (url, argument) => {
         let finalURL = url + argument;
-  
         fetch(`${finalURL}`)
           .then((response) => response.json())
           .then((response) => {
@@ -15,23 +14,23 @@ const GameDetail = (argument) => {
             let articleDOM = document.querySelector(".page-detail .article");
             let developersNames=""
             developers.forEach(element => {
-              developersNames+=`<p><a class="anim" href="#home/games&developers=${element.id}">${element.name}</a></p>`
+              developersNames+=`<p><a class="anim" href="#home/&developers=${element.id}&ordering=+added">${element.name}</a></p>`
             });
             let platformsNames=""
             platforms.forEach(element => {
-              platformsNames+=`<a class="anim" href="#home/games&platforms=${element.platform.id}">${element.platform.name}</a>, `              
+              platformsNames+=`<a class="anim" href="#home/&platforms=${element.platform.id}&ordering=-added">${element.platform.name}</a>, `              
             });
             let publishersNames=""
             publishers.forEach(element => {
-              publishersNames+=`<p><a class="anim" href="#home/games?ordering=-added&page_size=27&publishers=${element.id}">${element.name}</a></p>`                 
+              publishersNames+=`<p><a class="anim" href="#home/&publishers=${element.id}&ordering=-added&page_size=27">${element.name}</a></p>`                 
             }); 
             let genresNames = ""
             genres.forEach(element => {
-              genresNames+=`<a class="anim" href="#home/games?ordering=-added&page_size=27&genres=${element.id}">${element.name}</a>, `
+              genresNames+=`<a class="anim" href="#home/&genres=${element.id}&ordering=-added&page_size=27">${element.name}</a>, `
             });
             let tagsNames =""
             tags.forEach(element => {
-              tagsNames+=`<a class="anim" href="#home/games?ordering=-added&page_size=27&tags=${element.id}">${element.name}</a>, `
+              tagsNames+=`<a class="anim" href="#home/&ordering=-added&page_size=27&tags=${element.id}">${element.name}</a>, `
             });
             let storesNames=""
             stores.forEach(element => {
